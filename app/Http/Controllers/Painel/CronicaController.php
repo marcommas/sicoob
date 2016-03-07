@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Cronica;
 use Illuminate\Validation\Factory;
+use Input;
 
 class CronicaController extends Controller {
 
@@ -30,6 +31,7 @@ class CronicaController extends Controller {
     }
 
     public function postAdicionarCronica() {
+        
         $dadosForm = $this->request->all();
 
         $validator = $this->validator->make($dadosForm, Cronica::$rules);
@@ -42,7 +44,21 @@ class CronicaController extends Controller {
             }
             return $displayErrors;
         }
+        
 
+        $file = $this->request->file('caminho_arquivo');
+
+        if ($this->request->hasFile('caminho_arquivo') && $file->isValid()) {
+            
+            /*if ($file->getClientMimeType() == "image/png") {
+                $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
+            }*/
+
+            $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
+        }
+            
+        $dadosForm['caminho_arquivo'] = $file->getClientOriginalName();
+        
         $this->cronica->create($dadosForm);
 
         return 1;

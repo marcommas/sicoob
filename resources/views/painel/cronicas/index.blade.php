@@ -66,16 +66,19 @@
             <div class="modal-body">
                 <div class="alert alert-warning msg-war" role="alert" style="display: none;"></div>
                 <div class="alert alert-success msg-suc" role="alert" style="display: none;"></div>
-                <form class="form-padrao form-gestao" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica">
-                    {!! csrf_field() !!}
+                <!--<form class="form-padrao form-gestao"  method="POST" enctype="multipart/form-data" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica" >-->
+                <form method="POST" enctype="multipart/form-data" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica" > 
+                <!--{!! Form::open(['url' => '/painel/cronicas/adicionar-cronica', 'send' => '/painel/cronicas/adicionar-cronica',  'files' => true] ) !!}-->
+                  {!! csrf_field() !!}
                     <div class="form-group">
-                        <input type="text" name="cronica" class="form-control" placeholder="Título da Crônica">
+                        <input type="text" name="cronica" class="form-control" placeholder="Título da Crônica" maxlength="100">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="posicao" class="form-control" placeholder="Posição">
+                        <input type="number" name="posicao" class="form-control" placeholder="Posição">
                     </div>
                     <div class="form-group">
-                        <input type="file"  name="caminho_arquivo" class="form-control" maxlength="500">
+                        {!! Form::file('caminho_arquivo', array('accept'=>'application/pdf')) !!}
+                        <!--<input type="file" name="image" accept="application/pdf, image/*" class="form-control" >-->
                     </div>
                     <div class="form-group">
                         <label ><input type="checkbox" class="form-control" name="ativo" value="1">Ativo</label>
@@ -86,7 +89,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Salvar</button>
-
+                
+                <!--{!! Form::close() !!}-->
                 </form>
             </div>
         </div>

@@ -226,6 +226,8 @@
             });*/
             jQuery("input[type='text']").attr("value", "");
         });
+        
+
         </script>
 
     </body>

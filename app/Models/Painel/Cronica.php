@@ -11,8 +11,9 @@ class Cronica extends Model
 
     static $rules = [
         'cronica' => 'required|max:100',
-        'posicao' => 'required',
-        'caminho_arquivo' => 'max:500',
+        'posicao' => 'required|numeric',
+        //'caminho_arquivo' => 'image|mimes:jpeg,jpg,png,pdf',
+        //'caminho_arquivo' => 'required|',
     ];
     
     public function getCreatedAtAttribute($created_at){

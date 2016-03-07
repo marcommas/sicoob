@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    //protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
     
     //campo que não pode ser adicionado pelo usuário
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'password_confirmation'];
     
     static $rules = [
         'name' => 'required|max:255',
@@ -46,4 +46,16 @@ class User extends Model implements AuthenticatableContract,
         'password' => 'required|confirmed|min:6|max:20',
         'tipo' => 'required',
     ];
+    
+    static $rulesUpdate = [
+        'name' => 'required|max:255',
+        'email' => 'required|max:255',
+        'password' => 'max:60',
+        'tipo' => 'required',
+    ];
+    
+     public function setPasswordAttribute($password)
+    {   
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

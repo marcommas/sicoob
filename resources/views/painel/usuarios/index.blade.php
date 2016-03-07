@@ -18,18 +18,22 @@
     <tr>
         <th>Nome</th>
         <th>Email</th>
-        <th>Tipo</th>
-        <th>Ativo</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th style="text-align: center;">Tipo</th>
+        <th style="text-align: center;">Ativo</th>
         <th width="70px;"></th>
     </tr>
     @forelse($usuarios as $user)
     <tr>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
+        <td>{{$user->cidade}}</td>
+        <td>{{$user->estado}}</td>
         @if ($user->tipo == 1)
-            <td style="text-align: center;"><i class="fa fa-check"></i></td>
-        @else
-            <td></td>
+            <td style="text-align: center;">Administrador</i></td>
+        @else if ($user->tipo == 2)
+            <td style="text-align: center;">Comum</i></td>
         @endif
         @if ($user->ativo == 1)
             <td style="text-align: center;"><i class="fa fa-check"></i></td>

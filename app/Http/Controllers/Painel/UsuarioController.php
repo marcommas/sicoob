@@ -38,7 +38,7 @@ class UsuarioController extends Controller
         return view('painel.404.index');
     }
     public function postAdicionarUsuario(){
-        
+
         $dadosForm = $this->request->all();
         
         $validator = $this->validator->make($dadosForm, User::$rules);
@@ -63,8 +63,9 @@ class UsuarioController extends Controller
     
     public function postEditar($id){
         $dadosForm = $this->request->all();
+        //$dadosForm = $this->request->except('password');
         
-        $validator = $this->validator->make($dadosForm, User::$rules);
+        $validator = $this->validator->make($dadosForm, User::$rulesUpdate);
         if ($validator->fails()) {
             $messages = $validator->messages();
             $displayErrors = '';
