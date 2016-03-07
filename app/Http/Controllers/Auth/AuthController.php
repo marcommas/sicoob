@@ -10,7 +10,10 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+    //Especifica para aonde vai ser direcionado após logar
     protected $redirectPath = '/painel';
+    
+    //Monstra aonde está o local de realizar o login
     protected $loginPath = '/login';
     /*
     |--------------------------------------------------------------------------

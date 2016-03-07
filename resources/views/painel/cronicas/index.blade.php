@@ -1,6 +1,51 @@
 @extends('painel.templates.index')
 
 @section('content')
+
+
+<div class="col-md-12">
+    <div class="modal-header bg-padrao4">
+        <h4 class="modal-title" id="myModalLabel">Gestão de Crônicas</h4>
+    </div>
+    <form method="POST" enctype="multipart/form-data" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica" > 
+        <div class="form-dados modal-body">
+            <div class="alert alert-warning msg-war" role="alert" style="display: none;"></div>
+            <div class="alert alert-success msg-suc" role="alert" style="display: none;"></div>
+
+            {!! csrf_field() !!}
+
+            <div class="form-group">
+                <input type="text" name="cronica" class="form-control" placeholder="Título da Crônica" maxlength="100">
+            </div>
+            <div class="form-group">
+                <input type="number" name="posicao" class="form-control" placeholder="Posição">
+            </div>
+
+
+            <div class="form-group">
+                <input type="file" name="image" accept="application/pdf" >
+            </div>
+            <div class="form-group">
+                <label ><input type="checkbox" class="form-control" name="ativo" value="1">Ativo</label>
+            </div>
+
+            <div class="preloader" style="display: none;">Enviando os dados...</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-lg active" onclick="limparCampos();" >Limpar</button>
+            <button type="submit" class="btn btn-primary btn-lg active"><i class="fa fa-plus-circle"></i> Salvar</button>
+
+
+        </div>
+    </form>
+
+
+
+</div>
+
+
+
+
 <h1 class="titulo-pg-painel">Listagem  das Crônicas ({{$cronicas->count()}}):</h1>
 
 <div class="divider"></div>
@@ -8,7 +53,6 @@
 <div class="col-md-12">
 
     <form class="form-padrao form-inline padding-20 form-pesquisa" method="POST" send="/painel/cronicas/pesquisar/">
-        <a href="" class="btn-cadastrar" data-toggle="modal" data-target="#modalGestao"><i class="fa fa-plus-circle"></i> Cadastrar</a>
         <input type="text" placeholder="Pesquisa" class="texto-pesquisa">
     </form>
 </div>
@@ -26,9 +70,9 @@
         <td>{{$cronica->cronica}}</td>
         <td style="text-align: center;">{{$cronica->posicao}}</td>
         @if ($cronica->ativo == 1)
-            <td style="text-align: center;"><i class="fa fa-check"></i></td>
+        <td style="text-align: center;"><i class="fa fa-check"></i></td>
         @else
-            <td></td>
+        <td></td>
         @endif
         <td style="text-align: center;">{{$cronica->created_at}}</td>
         <td>
@@ -68,8 +112,8 @@
                 <div class="alert alert-success msg-suc" role="alert" style="display: none;"></div>
                 <!--<form class="form-padrao form-gestao"  method="POST" enctype="multipart/form-data" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica" >-->
                 <form method="POST" enctype="multipart/form-data" action="/painel/cronicas/adicionar-cronica" send="/painel/cronicas/adicionar-cronica" > 
-                <!--{!! Form::open(['url' => '/painel/cronicas/adicionar-cronica', 'send' => '/painel/cronicas/adicionar-cronica',  'files' => true] ) !!}-->
-                  {!! csrf_field() !!}
+                    <!--{!! Form::open(['url' => '/painel/cronicas/adicionar-cronica', 'send' => '/painel/cronicas/adicionar-cronica',  'files' => true] ) !!}-->
+                    {!! csrf_field() !!}
                     <div class="form-group">
                         <input type="text" name="cronica" class="form-control" placeholder="Título da Crônica" maxlength="100">
                     </div>
@@ -89,7 +133,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Salvar</button>
-                
+
                 <!--{!! Form::close() !!}-->
                 </form>
             </div>
@@ -102,8 +146,8 @@
 
 @section('scripts')
 
-    <script>
-        var urlAdd = '/painel/cronicas/adicionar-cronica';
-    </script>
+<script>
+    var urlAdd = '/painel/cronicas/adicionar-cronica';
+</script>
 
 @endsection

@@ -55,7 +55,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary btn-enviar-senha">Recuperar</button>
                         
-                         </form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 jQuery('form.form').submit(function(){
                     jQuery(".alert-danger").hide();
                     var dadosForm = jQuery(this).serialize();
-
+                   
                     jQuery.ajax({
                        url: jQuery(this).attr("send"),
                        type: "POST",
@@ -80,7 +80,7 @@
                        beforeSend: iniciaPreloader()
                     }).done(function(data){
                         finalizaPreloader();
-                        if (data== "1"){
+                        if (data == "1"){
                             location.href="/painel";
                         }else{
                             jQuery(".alert-danger").show();

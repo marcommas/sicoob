@@ -207,7 +207,17 @@
         function finalizaPreloaderDeletar() {
             jQuery(".preloader-deletar").hide();
         }
+        
+        jQuery("form.form-pesquisa").submit(function () {
+            var textoPesquisa = jQuery(".texto-pesquisa").val();
+            var url = jQuery(this).attr("send");
 
+            location.href = url + textoPesquisa;
+
+            return false;
+        });
+        
+        
         jQuery("form.form-pesquisa").submit(function () {
             var textoPesquisa = jQuery(".texto-pesquisa").val();
             var url = jQuery(this).attr("send");
@@ -227,7 +237,11 @@
             jQuery("input[type='text']").attr("value", "");
         });
         
-
+        function limparCampos(){
+            //jQuery("input[type='text']").attr("value", "");
+            //location.reload();
+            location.href = "/cronicas";
+        }
         </script>
 
     </body>

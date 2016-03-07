@@ -9,7 +9,7 @@ class PasswordController extends Controller
 {
     protected $redirectTo = '/painel';
     
-    //Messegem para assunto de recuperar senha
+    //Titulo do assundo do e-mail enviado para recuperação de senha
     protected $subject = 'Recuperar Senha';
     /*
     |--------------------------------------------------------------------------
