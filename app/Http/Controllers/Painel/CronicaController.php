@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Cronica;
 use Illuminate\Validation\Factory;
-use Input;
+use DB;
 
 class CronicaController extends Controller {
 
@@ -21,8 +21,14 @@ class CronicaController extends Controller {
     }
 
     public function getIndex() {
-        $cronicas = $this->cronica->paginate(15);
-
+        /*$users = DB::table('users')
+                ->orderBy('name', 'desc')
+                ->get();*/
+        $cronicas = $this->cronica->orderBy('posicao')->paginate(15);
+        //$users = DB::table('users')->get();
+        //$cronicas = DB::table('cronicas')->get();
+        //$cronicas = $this->cronica->get();
+        
         return view('painel.cronicas.index', compact('cronicas'));
     }
     
@@ -30,6 +36,10 @@ class CronicaController extends Controller {
         return view('painel.404.index');
     }
 
+     public function getAdicionar() {
+        return view('painel.cronicas.create');
+    }
+    
     public function postAdicionarCronica() {
         
         $dadosForm = $this->request->all();
@@ -53,19 +63,32 @@ class CronicaController extends Controller {
             /*if ($file->getClientMimeType() == "image/png") {
                 $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
             }*/
-
             $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
+            
+            $dadosForm['caminho_arquivo'] = $file->getClientOriginalName();
         }
             
-        $dadosForm['caminho_arquivo'] = $file->getClientOriginalName();
+        
+        
+        $ativo = $this->request->input('ativo');
+        
+        if ($ativo == 1) {
+            $dadosForm['ativo'] = 1;
+        }else{
+            $dadosForm['ativo'] = 0;
+        }
         
         $this->cronica->create($dadosForm);
 
-        return 1;
+        //return 1;
+        return redirect('painel/cronicas');
+
     }
 
     public function getEditar($id) {
-        return $this->cronica->find($id)->toJson();
+        $cronica = $this->cronica->find($id);
+
+        return view('painel.cronicas.edit', compact('cronica'));
     }
 
     public function postEditar($id) {
@@ -95,14 +118,22 @@ class CronicaController extends Controller {
         $cronica->getRelatorio()->detach();
         $cronica->delete();
         */
-        
         return 1;
     }
     
-     public function  getPesquisar($palavraPesquisa = ''){
+    /*public function  getPesquisar($palavraPesquisa = ''){
         $cronicas = $this->cronica->where('cronica', 'LIKE', "%{$palavraPesquisa}%")->paginate(15);
         
         return view('painel.cronicas.index', compact('cronicas'));
-    }
+    }*/
+    
+    /*public function  postPesquisar(){
+        $palavra = $this->request->input('pesquisar');
+        
+        //$cronicas = $this->cronica->where('cronica', 'LIKE', "%{$palavraPesquisa}%")->paginate(15);
+          $cronicas = $this->cronica->where('cronica', 'LIKE', "%{$palavra}%")->paginate(15);
+        
+        return view('painel.cronicas.index', compact('cronicas'));
+    }*/
 
 }

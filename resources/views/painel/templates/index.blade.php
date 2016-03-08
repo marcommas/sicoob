@@ -208,40 +208,37 @@
             jQuery(".preloader-deletar").hide();
         }
         
-        jQuery("form.form-pesquisa").submit(function () {
+        /*jQuery("form.form-pesquisa").submit(function () {
             var textoPesquisa = jQuery(".texto-pesquisa").val();
             var url = jQuery(this).attr("send");
 
             location.href = url + textoPesquisa;
 
             return false;
-        });
+        });*/
         
         
-        jQuery("form.form-pesquisa").submit(function () {
+        /*jQuery("form.form-pesquisa").submit(function () {
             var textoPesquisa = jQuery(".texto-pesquisa").val();
             var url = jQuery(this).attr("send");
 
             location.href = url + textoPesquisa;
 
             return false;
-        });
+        });*/
 
-        jQuery(".btn-cadastrar").click(function(){
+        /*jQuery(".btn-cadastrar").click(function(){
             jQuery("form.form-gestao").attr("send", urlAdd);
             jQuery("form.form-gestao").attr("action", urlAdd);
 
-            /*jQuery("form.form-gestao").each(function () {
-                this.reset;
-            });*/
             jQuery("input[type='text']").attr("value", "");
-        });
+        });*/
         
-        function limparCampos(){
-            //jQuery("input[type='text']").attr("value", "");
-            //location.reload();
-            location.href = "/cronicas";
+        function limparCampos(url){
+            location.href = url;
         }
+        
+
         </script>
 
     </body>
