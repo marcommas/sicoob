@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Cronica;
 use Illuminate\Validation\Factory;
-use DB;
 
 class CronicaController extends Controller {
 
@@ -21,13 +20,8 @@ class CronicaController extends Controller {
     }
 
     public function getIndex() {
-        /*$users = DB::table('users')
-                ->orderBy('name', 'desc')
-                ->get();*/
+
         $cronicas = $this->cronica->orderBy('posicao')->paginate(15);
-        //$users = DB::table('users')->get();
-        //$cronicas = DB::table('cronicas')->get();
-        //$cronicas = $this->cronica->get();
         
         return view('painel.cronicas.index', compact('cronicas'));
     }
@@ -43,16 +37,13 @@ class CronicaController extends Controller {
     public function postAdicionarCronica() {
         
         $dadosForm = $this->request->all();
-
+        
+        //Faz a validação dos dados com as regras cadastradas
         $validator = $this->validator->make($dadosForm, Cronica::$rules);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            $displayErrors = '';
-
-            foreach ($messages->all("<p>:message</p>") as $error) {
-                $displayErrors .= $error;
-            }
-            return $displayErrors;
+            //Retorna pra página com os erros que possuem e com os valores
+            return redirect()->back()->withErrors($messages)->withInput();
         }
         
 
@@ -63,9 +54,11 @@ class CronicaController extends Controller {
             /*if ($file->getClientMimeType() == "image/png") {
                 $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
             }*/
-            $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
-            
-            $dadosForm['caminho_arquivo'] = $file->getClientOriginalName();
+            $nomeArquivo = time()."-".$file->getClientOriginalName();
+
+            $file->move('assets/painel/upload/cronicas', $nomeArquivo );
+           
+            $dadosForm['caminho_arquivo'] = $nomeArquivo;
         }
             
         
@@ -78,11 +71,11 @@ class CronicaController extends Controller {
             $dadosForm['ativo'] = 0;
         }
         
+        //Cadastra no banco de dados com os dados passados pelo formulário
         $this->cronica->create($dadosForm);
 
         //return 1;
-        return redirect('painel/cronicas');
-
+        return redirect()->back()->with('sucesso', 'Cadastrado com Sucesso!');
     }
 
     public function getEditar($id) {
@@ -94,20 +87,39 @@ class CronicaController extends Controller {
     public function postEditar($id) {
         $dadosForm = $this->request->all();
 
-        $validator = $this->validator->make($dadosForm, Cronica::$rules);
+        $validator = $this->validator->make($dadosForm, Cronica::$rulesUpdate);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            $displayErrors = '';
 
-            foreach ($messages->all("<p>:message</p>") as $error) {
-                $displayErrors .= $error;
-            }
-            return $displayErrors;
+            return redirect()->back()->withErrors($messages)->withInput();
         }
+        
+        //Upload do arquivo de Crônica
+        $file = $this->request->file('caminho_arquivo');
 
+        if ($this->request->hasFile('caminho_arquivo') && $file->isValid()) {
+            /*if ($file->getClientMimeType() == "image/png") {
+                $file->move('assets/painel/upload/cronicas', $file->getClientOriginalName());
+            }*/
+            $nomeArquivo = time()."-".$file->getClientOriginalName();
+
+            $file->move('assets/painel/upload/cronicas', $nomeArquivo );
+           
+            $dadosForm['caminho_arquivo'] = $nomeArquivo;
+        }
+        
+        $ativo = $this->request->input('ativo');
+        
+        if ($ativo == 1) {
+            $dadosForm['ativo'] = 1;
+        }else{
+            $dadosForm['ativo'] = 0;
+        }
+        
         $this->cronica->find($id)->update($dadosForm);
 
-        return 1;
+        return redirect()->back()->with('sucesso', 'Alterado com Sucesso!');
+
     }
 
     public function getDeletar($id) {
@@ -119,6 +131,7 @@ class CronicaController extends Controller {
         $cronica->delete();
         */
         return 1;
+
     }
     
     /*public function  getPesquisar($palavraPesquisa = ''){

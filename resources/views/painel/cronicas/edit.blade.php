@@ -11,9 +11,28 @@
     <form class="form-padrao form-dados" method="POST" enctype="multipart/form-data" action="/painel/cronicas/editar/{{$cronica->id}}" send="/painel/cronicas/editar/{{$cronica->id}}" > 
 
         <div class="modal-body">
+            
+            @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissable fade in" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+            
+            @if (session()->has('sucesso'))
+                <div class="alert alert-success alert-dismissable fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    <p>{{  session('sucesso') }}</p>
 
-            <div class="alert alert-warning msg-war" role="alert" style="display: none;"></div>
-            <div class="alert alert-success msg-suc" role="alert" style="display: none;"></div>
+                </div>
+            @endif
 
             {!! csrf_field() !!}
             <div class="form-group">
@@ -42,8 +61,8 @@
             <div class="preloader" style="display: none;">Enviando os dados...</div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-lg active" onclick="limparCampos('/painel/cronicas/');" >Limpar</button>
-            <button type="submit" class="btn btn-primary btn-lg active"><i class="fa fa-plus-circle"></i> Salvar</button>
+            <button type="button" class="btn btn-default btn-lg active" onclick="limparCampos('/painel/cronicas/');" ><i class="fa fa-trash-o"></i>  Limpar</button>
+            <button type="submit" class="btn btn-primary btn-lg active"><i class="fa fa-floppy-o"></i> Salvar</button>
 
 
         </div>

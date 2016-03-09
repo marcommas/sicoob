@@ -36,10 +36,6 @@
 
                 <h3 class="acoes-painel">Seja bem-vindo {{Auth::user()->name}}!</h3>
 
-                <!--<a href="{{url('/logout')}}" >
-                  <button type="button" class="btn btn-default " style="float: right;">Sair</button>
-                </a>-->
-
             </div>
             <!--End Top-->
 
@@ -83,6 +79,7 @@
         <!-- Modal Para Deletar Conteúdo -->
         <div class="modal fade" id="modalConfirmacaoDeletar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
+
                 <div class="modal-content">
                     <div class="modal-header bg-padrao5">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -98,6 +95,7 @@
                         <button type="button" class="btn btn-danger btn-confirmar-deletar">Deletar</button>
                     </div>
                 </div>
+                </form
             </div>
         </div>
         <!-- Final modal de Deletar-->
@@ -110,134 +108,133 @@
 
         <script>
 
-        $(function () {
-            jQuery("form.form-gestao").submit(function () {
-                jQuery(".msg-war").hide();
-                jQuery(".msg-suc").hide();
+$(function () {
+    jQuery("form.form-gestao").submit(function () {
+        jQuery(".msg-war").hide();
+        jQuery(".msg-suc").hide();
 
-                var dadosForm = jQuery(this).serialize();
+        var dadosForm = jQuery(this).serialize();
 
-                jQuery.ajax({
-                    url: jQuery(this).attr("send"),
-                    data: dadosForm,
-                    type: "POST",
-                    beforeSend: iniciaPreloader()
-                }).done(function (data) {
-                    finalizaPreloader();
+        jQuery.ajax({
+            url: jQuery(this).attr("send"),
+            data: dadosForm,
+            type: "POST",
+            beforeSend: iniciaPreloader()
+        }).done(function (data) {
+            finalizaPreloader();
 
-                    if (data == "1") {
-                        jQuery(".msg-suc").html("Sucesso ao Salvar!");
-                        jQuery(".msg-suc").show();
+            if (data == "1") {
+                jQuery(".msg-suc").html("Sucesso ao Salvar!");
+                jQuery(".msg-suc").show();
 
-                        setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');location.reload();", 3000);
-                    } else {
-                        jQuery(".msg-war").html(data);
-                        jQuery(".msg-war").show();
+                setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');location.reload();", 3000);
+            } else {
+                jQuery(".msg-war").html(data);
+                jQuery(".msg-war").show();
 
-                        setTimeout("jQuery('.msg-war').hide();", 4500);
-                    }
-                }).fail(function () {
-                    finalizaPreloader();
-                    alert("Falha Inesperada!");
-                });
-
-                return false;
-            });
+                setTimeout("jQuery('.msg-war').hide();", 4500);
+            }
+        }).fail(function () {
+            finalizaPreloader();
+            alert("Falha Inesperada!");
         });
 
-        function iniciaPreloader() {
-            jQuery(".preloader").show();
-        }
+        return false;
+    });
+});
 
-        function finalizaPreloader() {
-            jQuery(".preloader").hide();
-        }
+function iniciaPreloader() {
+    jQuery(".preloader").show();
+}
 
-
-        function edit(url) {
-            jQuery.getJSON(url, function (data) {
-                jQuery.each(data, function (key, val) {
-                    jQuery("input[name='" + key + "']").attr("value", val);
-
-                    /*if (jQuery("option[value='" + val + "']").val() == val) {
-                     jQuery("option[value='" + val + "']").attr("selected", true);
-                     }*/
-                });
-            });
-
-            jQuery("#modalGestao").modal();
-
-            jQuery("form.form-gestao").attr("send", url);
-            jQuery("form.form-gestao").attr("action", url);
-
-        }
+function finalizaPreloader() {
+    jQuery(".preloader").hide();
+}
 
 
-        function del(url) {
-            jQuery(".url-deletar").val(url);
+function edit(url) {
+    jQuery.getJSON(url, function (data) {
+        jQuery.each(data, function (key, val) {
+            jQuery("input[name='" + key + "']").attr("value", val);
 
-            jQuery("#modalConfirmacaoDeletar").modal();
-        }
-
-        jQuery(".btn-confirmar-deletar").click(function () {
-            var url = jQuery(".url-deletar").val();
-
-            jQuery.ajax({
-                url: url,
-                type: "GET",
-                beforeSend: iniciaPreloaderDeletar()
-            }).done(function (data) {
-                finalizaPreloaderDeletar();
-
-                if (data == "1") {
-                    location.reload();
-                } else {
-                    alert("Falha ao Deletar!");
-                }
-
-            }).fail(function () {
-                alert("Falha Inesperada!");
-            });
+            /*if (jQuery("option[value='" + val + "']").val() == val) {
+             jQuery("option[value='" + val + "']").attr("selected", true);
+             }*/
         });
+    });
 
-        function iniciaPreloaderDeletar() {
-            jQuery(".preloader-deletar").show();
+    jQuery("#modalGestao").modal();
+
+    jQuery("form.form-gestao").attr("send", url);
+    jQuery("form.form-gestao").attr("action", url);
+
+}
+
+
+function del(url) {
+    jQuery(".url-deletar").val(url);
+
+    jQuery("#modalConfirmacaoDeletar").modal();
+}
+
+jQuery(".btn-confirmar-deletar").click(function () {
+    var url = jQuery(".url-deletar").val();
+
+    jQuery.ajax({
+        url: url,
+        type: "GET",
+        beforeSend: iniciaPreloaderDeletar()
+    }).done(function (data) {
+
+        if (data == "1") {
+            location.reload();
+        } else {
+            alert("Falha ao Deletar!");
         }
 
-        function finalizaPreloaderDeletar() {
-            jQuery(".preloader-deletar").hide();
-        }
-        
-        /*jQuery("form.form-pesquisa").submit(function () {
-            var textoPesquisa = jQuery(".texto-pesquisa").val();
-            var url = jQuery(this).attr("send");
+    }).fail(function () {
+        alert("Falha Inesperada!");
+    });
+});
 
-            location.href = url + textoPesquisa;
+function iniciaPreloaderDeletar() {
+    jQuery(".preloader-deletar").show();
+}
 
-            return false;
-        });*/
-        
-        
-        /*jQuery("form.form-pesquisa").submit(function () {
-            var textoPesquisa = jQuery(".texto-pesquisa").val();
-            var url = jQuery(this).attr("send");
+function finalizaPreloaderDeletar() {
+    jQuery(".preloader-deletar").hide();
+}
 
-            location.href = url + textoPesquisa;
+/*jQuery("form.form-pesquisa").submit(function () {
+ var textoPesquisa = jQuery(".texto-pesquisa").val();
+ var url = jQuery(this).attr("send");
+ 
+ location.href = url + textoPesquisa;
+ 
+ return false;
+ });*/
 
-            return false;
-        });*/
 
-        /*jQuery(".btn-cadastrar").click(function(){
-            jQuery("form.form-gestao").attr("send", urlAdd);
-            jQuery("form.form-gestao").attr("action", urlAdd);
+/*jQuery("form.form-pesquisa").submit(function () {
+ var textoPesquisa = jQuery(".texto-pesquisa").val();
+ var url = jQuery(this).attr("send");
+ 
+ location.href = url + textoPesquisa;
+ 
+ return false;
+ });*/
 
-            jQuery("input[type='text']").attr("value", "");
-        });*/
-        
-        function limparCampos(url){
-            location.href = url;
-        }
-        
+/*jQuery(".btn-cadastrar").click(function(){
+ jQuery("form.form-gestao").attr("send", urlAdd);
+ jQuery("form.form-gestao").attr("action", urlAdd);
+ 
+ jQuery("input[type='text']").attr("value", "");
+ });*/
+
+function limparCampos(url) {
+    location.href = url;
+}
+
 
         </script>
 

@@ -54,6 +54,8 @@ class User extends Model implements AuthenticatableContract,
         'tipo' => 'required',
     ];
     
+   
+    
      public function setPasswordAttribute($password)
     {   
         $this->attributes['password'] = bcrypt($password);
