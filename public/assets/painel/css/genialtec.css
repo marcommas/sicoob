@@ -15,7 +15,7 @@
 
 /*Resets*/
 .form-padrao{}
-.form-padrao input[type="text"],input[type="password"]{border-radius: 0px;height: 44px;border: 1px solid #D5F4FF;color: #33B5E5;font-size: 16px;}
+.form-padrao input[type="text"],input[type="password"],input[type="email"], input[type="number"], select, option {border-radius: 0px;height: 40px;border: 1px solid #D5F4FF; color:#686868 ;font-size: 16px;}
 .form-padrao input[type="submit"]{}
 a:hover{text-decoration: none;color: #F39020 !important;}
 

@@ -10,11 +10,11 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
-{
-    use Authenticatable, Authorizable, CanResetPassword;
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
+
+    use Authenticatable,
+        Authorizable,
+        CanResetPassword;
 
     /**
      * The database table used by the model.
@@ -36,28 +36,34 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-    
     //campo que não pode ser adicionado pelo usuário
     protected $guarded = ['id', 'password_confirmation'];
-    
     static $rules = [
-        'name' => 'required|max:255',
+        'name' => 'required|max:100',
         'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|confirmed|min:6|max:20',
+        'password' => 'required|confirmed|min:6|max:60',
         'tipo' => 'required',
     ];
     
+    
+
     static $rulesUpdate = [
-        'name' => 'required|max:255',
+        'name' => 'required|max:100',
         'email' => 'required|max:255',
-        'password' => 'max:60',
         'tipo' => 'required',
     ];
     
-   
-    
-     public function setPasswordAttribute($password)
-    {   
+    static $rulesUpdateNewPassword = [
+        'name' => 'required|max:100',
+        'email' => 'required|max:255',
+        'old_password' => 'required|min:6|max:60|old_password',
+        'password' => 'required|confirmed|min:6|max:60',
+        'password_confirmation'=> 'required|min:6|max:60|different:old_password|same:new_password',
+        'tipo' => 'required',
+    ];
+
+    public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);
     }
+
 }

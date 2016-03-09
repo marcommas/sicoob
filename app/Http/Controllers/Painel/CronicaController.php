@@ -30,7 +30,7 @@ class CronicaController extends Controller {
         return view('painel.404.index');
     }
 
-     public function getAdicionar() {
+    public function getAdicionar() {
         return view('painel.cronicas.create');
     }
     
@@ -74,7 +74,6 @@ class CronicaController extends Controller {
         //Cadastra no banco de dados com os dados passados pelo formulário
         $this->cronica->create($dadosForm);
 
-        //return 1;
         return redirect()->back()->with('sucesso', 'Cadastrado com Sucesso!');
     }
 
@@ -116,8 +115,6 @@ class CronicaController extends Controller {
             $dadosForm['ativo'] = 0;
         }
         
-        $this->cronica->find($id)->update($dadosForm);
-
         return redirect()->back()->with('sucesso', 'Alterado com Sucesso!');
 
     }

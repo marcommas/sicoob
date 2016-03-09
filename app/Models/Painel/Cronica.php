@@ -11,14 +11,14 @@ class Cronica extends Model
 
     static $rules = [
         'cronica' => 'required|max:100',
-        'posicao' => 'required|numeric|unique:cronicas',
+        'posicao' => 'required|integer|unique:cronicas',
         //'caminho_arquivo' => 'image|mimes:jpeg,jpg,png,pdf',
         'caminho_arquivo' => 'required|mimes:pdf|max:5000',
     ];
     
     static $rulesUpdate = [
         'cronica' => 'required|max:100',
-        'posicao' => 'required|numeric',
+        'posicao' => 'required|integer',
         //'caminho_arquivo' => 'image|mimes:jpeg,jpg,png,pdf',
         'caminho_arquivo' => 'mimes:pdf|max:5000',
     ];

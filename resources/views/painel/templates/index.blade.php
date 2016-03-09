@@ -108,6 +108,7 @@
 
         <script>
 
+/*
 $(function () {
     jQuery("form.form-gestao").submit(function () {
         jQuery(".msg-war").hide();
@@ -157,9 +158,6 @@ function edit(url) {
         jQuery.each(data, function (key, val) {
             jQuery("input[name='" + key + "']").attr("value", val);
 
-            /*if (jQuery("option[value='" + val + "']").val() == val) {
-             jQuery("option[value='" + val + "']").attr("selected", true);
-             }*/
         });
     });
 
@@ -169,7 +167,7 @@ function edit(url) {
     jQuery("form.form-gestao").attr("action", url);
 
 }
-
+*/
 
 function del(url) {
     jQuery(".url-deletar").val(url);

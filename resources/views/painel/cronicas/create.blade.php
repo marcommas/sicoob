@@ -55,12 +55,8 @@
 
             <div class="form-group">
                 <label ><input type="checkbox" class="form-control" name="ativo" value="1" >Ativo</label>
-
             </div>
             
-
-            <div class="preloader" style="display: none;">Enviando os dados...</div>
-
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default btn-lg active" onclick="limparCampos('/painel/cronicas/adicionar');" ><i class="fa fa-trash-o"></i> Limpar</button>
