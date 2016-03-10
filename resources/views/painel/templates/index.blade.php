@@ -2,79 +2,101 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <title>{{$titulo or 'Painel | Sicoob'}}</title>
 
         <link rel="icon" type="image/png" href="{{url('assets/img/favicon.ico')}}">
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="{{url('assets/css/bootstrap-3.3.6.min.css')}}">
+        <link rel="stylesheet" href="{{url('assets/css/bootstrap.css')}}" >
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="{{url('assets/css/bootstrap-theme-3.3.6.min.css')}}">
-        <!--<link rel="stylesheet" href="{{url('assets/css/font-awesome-4.5.0.min.css')}}">-->
-        <!--<link rel="stylesheet" href="{{url('assets/css/font-awesome-4.3.0.min.css')}}">-->
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href="{{url('assets/css/sb-admin-2.css') }}" rel="stylesheet">
+
+        <link href="{{url('assets/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
         <link rel="stylesheet" type="text/css" href="{{url('assets/painel/css/genialtec.css')}}">
         <link rel="stylesheet" type="text/css" href="{{url('assets/painel/css/genialtec-responsivo.css')}}">
 
-        <!--JQuery-->
-        <!--<script src="assets/js/jquery-1.11.3.min.js"></script>-->
-        <!--<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>-->
+
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
     </head>
-    <body class="bg-padrao">
+    <body >
 
-        <header>
-            <h1 class="oculta">{{$titulo or 'Painel | Sicoob'}}</h1>
-        </header>
+        <div id="wrapper">
 
-        <section class="painel">
-            <h1 class="oculta">{{$titulo or 'Painel | Sicoob'}}</h1>
-
-            <div class="topo-painel col-md-12">
-                
-                <h3 class="acoes-painel">Seja bem-vindo {{Auth::user()->name}}!</h3>
-                
-                <img src="{{url('assets/img/logo-sicoob.jpg')}}" class="logo-painel" alt="Logo Sicoob" title="Painel Sicoob">
-
-
-            </div>
-            <!--End Top-->
-
-            <div class="clear"></div>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;  background-color: #ffffff;">
+                <div class="navbar-header">
+                    <h3 class="acoes-painel hidden-xs" >Seja bem-vindo {{Auth::user()->name}}!</h3>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="collapseExample">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
 
-            <div class="menu-painel col-md-2">
-                <ul class="menu-painel-ul">
-                    <li>
-                        <a href="{{url('/painel/')}}"><i class="fa fa-home"></i> Home</a>
-                    </li>    
-                    <li>
-                        <a href="{{url('/painel/usuarios')}}"><i class="fa fa-users"></i> Usuários</a>
-                    </li>
-                    <li>
-                        <a href="{{url('/painel/cronicas')}}"><i class="fa fa-book"></i> Crônicas</a>
-                    </li>
-                    <li>
-                        <a href="{{url('/painel/relatorios')}}"><i class="fa fa-bar-chart"></i> Relatórios</a>
-                    </li>
-                    <li>
-                        <a href="{{url('/painel/')}}"><i class="fa fa-cog"></i> Configurações</a>
-                    </li>
-                    <li>
-                        <a href="{{url('/logout')}}"><i class="fa fa-sign-out"></i> Sair</a>
-                    </li>
-                </ul>
-            </div>
-            <!--End menu-->
-
-            <section class="conteudo col-md-10">
-                <div class="cont">
-                    @yield('content')
                 </div>
-            </section>
-            <!--End Conteúdo-->
-        </section>
+
+                <ul class="nav navbar-top-links navbar-right hidden-xs">
+
+                    <img src="{{url('assets/img/logo-sicoob.jpg')}}" class="logo-painel" alt="Logo Sicoob" title="Painel Sicoob">
+
+                </ul>
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav collapse navbar-collapse">
+                        <br>
+                        <ul class="nav nav-color"  >
+                            <li>
+                                <a href="{{url('/painel/')}}" class="corNavegacao" ><i class="fa fa-home"></i> Home</a>
+                            </li>    
+                            <li>
+                                <a href="{{url('/painel/usuarios')}} " class="corNavegacao"><i class="fa fa-users"></i> Usuários</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/painel/cronicas')}}" class="corNavegacao"><i class="fa fa-book"></i> Crônicas</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/painel/relatorios')}}" class="corNavegacao"><i class="fa fa-bar-chart"></i> Relatórios</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/painel/')}}" class="corNavegacao"><i class="fa fa-cog"></i> Configurações</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/logout')}}" class="corNavegacao"><i class="fa fa-sign-out"></i> Sair</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </nav>
+
+            <div id="page-wrapper">
+
+                <div class="row">
+
+                    <section class="conteudo col-md-12">
+                        <div >
+                            @yield('content')
+                        </div>
+                    </section>
+
+                </div>
+
+
+
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
 
 
 
@@ -100,76 +122,78 @@
                 </form
             </div>
         </div>
-        <!-- Final modal de Deletar-->
+        <!-- Final modal de Deletar
 
         <!-- Latest compiled and minified JavaScript -->
         <!--<script type="text/javascript" href="{{url('assets/js/bootstrap-3.3.6.min.js')}}"></script>-->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
 
         @yield('scripts')
 
         <script>
 
 /*
-$(function () {
-    jQuery("form.form-gestao").submit(function () {
-        jQuery(".msg-war").hide();
-        jQuery(".msg-suc").hide();
-
-        var dadosForm = jQuery(this).serialize();
-
-        jQuery.ajax({
-            url: jQuery(this).attr("send"),
-            data: dadosForm,
-            type: "POST",
-            beforeSend: iniciaPreloader()
-        }).done(function (data) {
-            finalizaPreloader();
-
-            if (data == "1") {
-                jQuery(".msg-suc").html("Sucesso ao Salvar!");
-                jQuery(".msg-suc").show();
-
-                setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');location.reload();", 3000);
-            } else {
-                jQuery(".msg-war").html(data);
-                jQuery(".msg-war").show();
-
-                setTimeout("jQuery('.msg-war').hide();", 4500);
-            }
-        }).fail(function () {
-            finalizaPreloader();
-            alert("Falha Inesperada!");
-        });
-
-        return false;
-    });
-});
-
-function iniciaPreloader() {
-    jQuery(".preloader").show();
-}
-
-function finalizaPreloader() {
-    jQuery(".preloader").hide();
-}
-
-
-function edit(url) {
-    jQuery.getJSON(url, function (data) {
-        jQuery.each(data, function (key, val) {
-            jQuery("input[name='" + key + "']").attr("value", val);
-
-        });
-    });
-
-    jQuery("#modalGestao").modal();
-
-    jQuery("form.form-gestao").attr("send", url);
-    jQuery("form.form-gestao").attr("action", url);
-
-}
-*/
+ $(function () {
+ jQuery("form.form-gestao").submit(function () {
+ jQuery(".msg-war").hide();
+ jQuery(".msg-suc").hide();
+ 
+ var dadosForm = jQuery(this).serialize();
+ 
+ jQuery.ajax({
+ url: jQuery(this).attr("send"),
+ data: dadosForm,
+ type: "POST",
+ beforeSend: iniciaPreloader()
+ }).done(function (data) {
+ finalizaPreloader();
+ 
+ if (data == "1") {
+ jQuery(".msg-suc").html("Sucesso ao Salvar!");
+ jQuery(".msg-suc").show();
+ 
+ setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');location.reload();", 3000);
+ } else {
+ jQuery(".msg-war").html(data);
+ jQuery(".msg-war").show();
+ 
+ setTimeout("jQuery('.msg-war').hide();", 4500);
+ }
+ }).fail(function () {
+ finalizaPreloader();
+ alert("Falha Inesperada!");
+ });
+ 
+ return false;
+ });
+ });
+ 
+ function iniciaPreloader() {
+ jQuery(".preloader").show();
+ }
+ 
+ function finalizaPreloader() {
+ jQuery(".preloader").hide();
+ }
+ 
+ 
+ function edit(url) {
+ jQuery.getJSON(url, function (data) {
+ jQuery.each(data, function (key, val) {
+ jQuery("input[name='" + key + "']").attr("value", val);
+ 
+ });
+ });
+ 
+ jQuery("#modalGestao").modal();
+ 
+ jQuery("form.form-gestao").attr("send", url);
+ jQuery("form.form-gestao").attr("action", url);
+ 
+ }
+ */
 
 function del(url) {
     jQuery(".url-deletar").val(url);

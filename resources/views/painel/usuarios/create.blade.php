@@ -3,16 +3,15 @@
 @section('content')
 
 <div class="col-md-12">
+    
+    <h1 class="titulo-pg-painel">Gestão de Usuários</h1>
+        <div class="divider"></div>
     <div>
-        <a href="{{url('/painel')}}"></i> Home</a> >
-        <a href="{{url('/painel/usuarios')}}"> Usuários</a> 
-        > <span style="font-weight: bold; color: #4C7C83;">Cadastro de Usuários</span>
+        <a href="{{url('/painel')}}"></i> Home</a> \
+        <a href="{{url('/painel/usuarios')}}"> Usuários</a> \
+        <span style="font-weight: bold; color: #4C7C83;">Cadastro de Usuários</span>
     </div>
-    <div class="modal-header bg-padrao4">
-        <h4 class="modal-title" id="myModalLabel">Gestão de Usuários</h4>
-    </div>
-    
-    
+
     
     <form class="form-padrao form-dados" method="POST" action="/painel/usuarios/adicionar-usuario" send="/painel/usuarios/adicionar-usuario" >
 

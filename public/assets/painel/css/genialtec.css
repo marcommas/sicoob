@@ -54,9 +54,9 @@ Painel
 .topo-painel{background-color: #FFF;padding: 10px 6px;float: left;width: 100%;}
 .logo-painel{max-width: 150px; float: right;}
 /*.acoes-painel{float: right;border: 1px solid #33B5E5;padding: 8px;color: #33B5E5;}*/
-.acoes-painel{float: left; color: #686868;}
+.acoes-painel{float: left; color: #686868; padding-left: 10px;}
 .icon-acoes-painel{margin: 8px;float: right;}
-
+.corNavegacao{color: #686868;}
 
 /*Menu*/
 .menu-painel{background-color: #4C7C83;padding: 0px; min-height: 805px;}
