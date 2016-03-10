@@ -1,13 +1,13 @@
 @extends('painel.templates.index')
 
 @section('content')
-<h1 class="titulo-pg-painel">Listagem  dos Usuários ({{$usuarios->count()}}):</h1>
+<h1 class="titulo-pg-painel">Listagem  dos Usuários ({{$totalUsuarios}}):</h1>
 
 <div class="divider"></div>
 
 <div class="col-md-12">
     <div class="form-padrao form-inline padding-20">
-         <a href="usuarios/adicionar" class="btn-cadastrar" ><i class="fa fa-plus-circle"></i> Novo Usuário</a>
+        <a href="usuarios/adicionar" class="btn-cadastrar" ><i class="fa fa-plus-circle"></i> Novo Usuário</a>
     </div>
 </div>
 
@@ -28,22 +28,23 @@
         <td>{{$user->cidade}}</td>
         <td>{{$user->estado}}</td>
         @if ($user->tipo == 1)
-            <td style="text-align: center;">Administrador</i></td>
+        <td style="text-align: center;">Administrador</i></td>
         @elseif ($user->tipo == 2)
-            <td style="text-align: center;">Comum</i></td>
+        <td style="text-align: center;">Comum</i></td>
         @endif
         @if ($user->ativo == 1)
-            <td style="text-align: center;"><i class="fa fa-check"></i></td>
+        <td style="text-align: center;"><i class="fa fa-check"></i></td>
         @else
-            <td></td>
+        <td></td>
         @endif
         <td>
             <a class="edit" href="usuarios/editar/{{$user->id}}">
                 <i class="fa fa-pencil-square-o"></i>
             </a>
-            <a class="delete" onclick="del('/painel/usuarios/deletar/{{$user->id}}')">
+
+            <!--<a class="delete" onclick="del('/painel/usuarios/deletar/{{$user->id}}')">
                 <i class="fa fa-times"></i>
-            </a>
+            </a>-->
         </td>
     </tr>
     @empty
@@ -55,18 +56,15 @@
 
 </table>
 
-<nav>
-    {!! $usuarios->render() !!}
-</nav>
+
+<div class="text-center">
+    <div class="pagination" >
+        {!! $usuarios->render() !!}
+    </div>
+</div>
 
 
 @endsection
 
-@section('scripts')
 
-    <script>
-        var urlAdd = '/painel/usuarios/adicionar-usuario';
-    </script>
-
-@endsection
 

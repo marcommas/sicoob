@@ -38,6 +38,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = ['password', 'remember_token'];
     //campo que não pode ser adicionado pelo usuário
     protected $guarded = ['id', 'password_confirmation'];
+    
+    //Regras para adicionar
     static $rules = [
         'name' => 'required|max:100',
         'email' => 'required|email|max:255|unique:users',
@@ -45,20 +47,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'tipo' => 'required',
     ];
     
-    
-
+    //Regras para alterar sem modificar a senha
     static $rulesUpdate = [
         'name' => 'required|max:100',
         'email' => 'required|max:255',
         'tipo' => 'required',
     ];
     
+    //Regras para alterar, modificando a senha
     static $rulesUpdateNewPassword = [
         'name' => 'required|max:100',
         'email' => 'required|max:255',
-        'old_password' => 'required|min:6|max:60|old_password',
+        'old_password' => 'required|min:6|max:60',
         'password' => 'required|confirmed|min:6|max:60',
-        'password_confirmation'=> 'required|min:6|max:60|different:old_password|same:new_password',
+        'password_confirmation'=> 'required|min:6|max:60|different:old_password|same:password',
         'tipo' => 'required',
     ];
 

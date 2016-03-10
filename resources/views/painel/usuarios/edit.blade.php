@@ -3,6 +3,12 @@
 @section('content')
 
 <div class="col-md-12">
+     <div>
+        <a href="{{url('/painel')}}"></i> Home</a> >
+        <a href="{{url('/painel/usuarios')}}"> Usuários</a> 
+        > <span style="font-weight: bold; color:#4C7C83;">Alteração de Usuários</span>
+    </div>
+    
     <div class="modal-header bg-padrao4">
         <h4 class="modal-title" id="myModalLabel">Gestão de Usuários</h4>
     </div>

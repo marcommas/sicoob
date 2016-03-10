@@ -32,9 +32,11 @@
             <h1 class="oculta">{{$titulo or 'Painel | Sicoob'}}</h1>
 
             <div class="topo-painel col-md-12">
+                
+                <h3 class="acoes-painel">Seja bem-vindo {{Auth::user()->name}}!</h3>
+                
                 <img src="{{url('assets/img/logo-sicoob.jpg')}}" class="logo-painel" alt="Logo Sicoob" title="Painel Sicoob">
 
-                <h3 class="acoes-painel">Seja bem-vindo {{Auth::user()->name}}!</h3>
 
             </div>
             <!--End Top-->

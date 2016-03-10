@@ -22,8 +22,9 @@ class CronicaController extends Controller {
     public function getIndex() {
 
         $cronicas = $this->cronica->orderBy('posicao')->paginate(15);
+        $totalCronicas = $this->cronica->all()->count();
         
-        return view('painel.cronicas.index', compact('cronicas'));
+        return view('painel.cronicas.index', compact('cronicas', 'totalCronicas'));
     }
     
     public function missingMethod($parameters = array()) {

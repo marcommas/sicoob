@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Validation\Factory;
+use Illuminate\Support\Facades\Auth;
+use Hash;
 
 class UsuarioController extends Controller {
 
@@ -22,6 +24,7 @@ class UsuarioController extends Controller {
     public function getIndex() {
 
         $usuarios = $this->user->orderBy('name')->paginate(15);
+        $totalUsuarios = $this->user->all()->count();
         /*
           $alunos = $this->aluno
           ->join('matriculas', 'matriculas.id_aluno', '=', 'alunos.id')
@@ -30,7 +33,7 @@ class UsuarioController extends Controller {
           ->paginate($this->totalItensPorPagina);
          *          */
 
-        return view('painel.usuarios.index', compact('usuarios'));
+        return view('painel.usuarios.index', compact('usuarios', 'totalUsuarios'));
     }
 
     public function missingMethod($parameters = array()) {
@@ -68,25 +71,27 @@ class UsuarioController extends Controller {
     }
 
     public function getEditar($id) {
-        //return $this->user->find($id)->toJson();
         $user = $this->user->find($id);
 
         return view('painel.usuarios.edit', compact('user'));
     }
 
     public function postEditar($id) {
-        $dadosForm = $this->request->all();
+        
+        $dadosFormSemSenha = $this->request->except('password', 'old_password');
+        
+        $dadosFormComSenha = $this->request->all();
 
+        $antigaSenha = $this->request->input('old_password');
         $novaSenha = $this->request->input('password');
 
         //Regras quando o usuário não quiser solicitar a troca de senha
         if (empty($novaSenha)) {
-            $validator = $this->validator->make($dadosForm, User::$rulesUpdate);
+            $validator = $this->validator->make($dadosFormSemSenha, User::$rulesUpdate);
         }
         //Regras para quando o usuário solicita a troca de senhas
         else {
-
-            $validator = $this->validator->make($dadosForm, User::$rulesUpdateNewPassword);
+            $validator = $this->validator->make($dadosFormComSenha, User::$rulesUpdateNewPassword);
         }
 
         if ($validator->fails()) {
@@ -95,21 +100,43 @@ class UsuarioController extends Controller {
             return redirect()->back()->withErrors($messages)->withInput();
         }
 
+
+       
         //Cadastro no Bando de dados, se o usuário estiver ativo == 1 e se não estiver == 0
         $ativo = $this->request->input('ativo');
         if ($ativo == 1) {
-            $dadosForm['ativo'] = 1;
+            $dadosFormSemSenha['ativo'] = 1;
+            $dadosFormComSenha['ativo'] = 1;
         } else {
-            $dadosForm['ativo'] = 0;
+            $dadosFormSemSenha['ativo'] = 0;
+            $dadosFormComSenha['ativo'] = 1;
         }
 
         //Atualização dos dados de quando o usuário NÃO alterar a senha
         if (empty($novaSenha)) {
-            $this->user->find($id)->update($this->request->except('password', 'old_password' ));
+            //$this->user->find($id)->update($this->request->except('password', 'old_password'));
+            $this->user->find($id)->update($dadosFormSemSenha);
         }
         //Atualização dos dados de quando o usuário ALTERAR a senha
         else {
-            $this->user->find($id)->update($dadosForm);
+            //$this->user->find($id)->update($dadosForm);
+            
+            $usuario = User::find(Auth::user()->id);
+            
+            if (Hash::check($antigaSenha, $usuario->getAuthPassword())) {
+                $usuario->password = Hash::make($novaSenha);
+
+                $this->user->find($id)->update($this->request->except('old_password'));
+                // save the new password
+                /*if ($user->save()) {
+                    return Redirect::route('home')
+                                    ->with('global', 'Your password has been changed.');
+                }*/
+            }else{
+                $messages = "A senha antiga não conhecide com a cadastrada no banco de dados.";
+
+                return redirect()->back()->withErrors($messages)->withInput();
+            }
         }
 
         return redirect()->back()->with('sucesso', 'Alterado com Sucesso!');

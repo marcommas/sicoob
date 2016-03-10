@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="titulo-pg-painel">Listagem  das Crônicas ({{$cronicas->count()}}):</h1>
+<h1 class="titulo-pg-painel">Listagem  das Crônicas ({{$totalCronicas}}):</h1>
 
 <div class="divider"></div>
 
