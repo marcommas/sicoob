@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Terminal;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller{
 
     public function getIndex(){
-        return view('terminal.home.index');
+        return redirect('/login');
     }
     
     public function missingMethod($parameters = array()) {

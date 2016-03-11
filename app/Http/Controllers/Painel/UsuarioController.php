@@ -109,29 +109,24 @@ class UsuarioController extends Controller {
             $dadosFormComSenha['ativo'] = 1;
         } else {
             $dadosFormSemSenha['ativo'] = 0;
-            $dadosFormComSenha['ativo'] = 1;
+            $dadosFormComSenha['ativo'] = 0;
         }
 
         //Atualização dos dados de quando o usuário NÃO alterar a senha
         if (empty($novaSenha)) {
             //$this->user->find($id)->update($this->request->except('password', 'old_password'));
-            $this->user->find($id)->update($dadosFormSemSenha);
+            //$this->user->find($id)->update($dadosFormSemSenha);
+            $this->user->find($id)->update($this->request->except('password', 'old_password', 'email', 'tipo'));
         }
         //Atualização dos dados de quando o usuário ALTERAR a senha
         else {
-            //$this->user->find($id)->update($dadosForm);
-            
             $usuario = User::find(Auth::user()->id);
             
             if (Hash::check($antigaSenha, $usuario->getAuthPassword())) {
                 $usuario->password = Hash::make($novaSenha);
 
-                $this->user->find($id)->update($this->request->except('old_password'));
-                // save the new password
-                /*if ($user->save()) {
-                    return Redirect::route('home')
-                                    ->with('global', 'Your password has been changed.');
-                }*/
+                $this->user->find($id)->update($this->request->except('old_password', 'email', 'tipo'));
+
             }else{
                 $messages = "A senha antiga não conhecide com a cadastrada no banco de dados.";
 

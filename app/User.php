@@ -50,18 +50,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     //Regras para alterar sem modificar a senha
     static $rulesUpdate = [
         'name' => 'required|max:100',
-        'email' => 'required|max:255',
-        'tipo' => 'required',
+        //'email' => 'required|max:255',
+        //'tipo' => 'required',
     ];
     
     //Regras para alterar, modificando a senha
     static $rulesUpdateNewPassword = [
         'name' => 'required|max:100',
-        'email' => 'required|max:255',
+        //'email' => 'required|max:255',
         'old_password' => 'required|min:6|max:60',
         'password' => 'required|confirmed|min:6|max:60',
         'password_confirmation'=> 'required|min:6|max:60|different:old_password|same:password',
-        'tipo' => 'required',
+        //'tipo' => 'required',
     ];
 
     public function setPasswordAttribute($password) {

@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'painel', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'painel', 'middleware' => 'auth:1'], function(){
     
     Route::controller('usuarios', 'Painel\UsuarioController');
     
@@ -9,6 +9,11 @@ Route::group(['prefix' => 'painel', 'middleware' => 'auth'], function(){
     Route::controller('relatorios', 'Painel\RelatorioController');
 
     Route::controller('/', 'Painel\PainelController');
+});
+
+Route::group(['prefix' => 'terminal', 'middleware' => 'auth.tipo:2'], function(){
+    
+    Route::controller('/', 'Terminal\HomeController');
 });
 
 // Authentication routes...
@@ -28,5 +33,6 @@ Route::post('recuperar-senha', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('resetar-senha/{token}', 'Auth\PasswordController@getReset');
 Route::post('resetar-senha/', 'Auth\PasswordController@postReset');
-    
-Route::controller('/', 'Terminal\HomeController');
+
+//Rota / irá direcionar para o login
+Route::controller('/', 'HomeController');

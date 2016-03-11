@@ -7,9 +7,9 @@
     <h1 class="titulo-pg-painel">Gestão de Crônicas</h1>
         <div class="divider"></div>
     <div>
-        <a href="{{url('/painel')}}"></i> Home</a> \
-        <a href="{{url('/painel/cronicas')}}"> Crônicas</a> \
-        <span style="font-weight: bold; color: #4C7C83;">Alteração de Crônicas</span>
+        <a href="{{url('/painel')}}" class="sequenciaPaginas"></i> Home</a> \
+        <a href="{{url('/painel/cronicas')}}" class="sequenciaPaginas"> Crônicas</a> \
+        <span class="sequenciaPaginasAtual">Alteração de Crônicas</span>
     </div>
         
 
@@ -48,8 +48,8 @@
             </div>
             
             @if(  ($cronica->caminho_arquivo) != "" )
-            <a href="/assets/painel/upload/cronicas/{{$cronica->caminho_arquivo}}" target="_blank"> 
-                <label >Visualizar Arquivo Cadastrado</label>
+            <a href="/assets/painel/upload/cronicas/{{$cronica->caminho_arquivo}}" target="_blank" class="sequenciaPaginasAtual"> 
+                <label  >Visualizar Arquivo Cadastrado</label>
             </a>
             @endif
             

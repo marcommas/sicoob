@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate
 {
@@ -32,9 +33,16 @@ class Authenticate
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $tipo)
     {
+        //dd(Auth::user()->tipo);
+        //Se não for admin volta pra login
+        
+       
         if ($this->auth->guest()) {
+            //Se o usuário for comum ele volta pra pag de login
+             
+           
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
@@ -43,7 +51,10 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
-
+        
+        if (Auth::user()->tipo <> $tipo) {
+            return redirect('/logout');
+        }
         return $next($request);
     }
 }

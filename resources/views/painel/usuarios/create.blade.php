@@ -7,9 +7,9 @@
     <h1 class="titulo-pg-painel">Gestão de Usuários</h1>
         <div class="divider"></div>
     <div>
-        <a href="{{url('/painel')}}"></i> Home</a> \
-        <a href="{{url('/painel/usuarios')}}"> Usuários</a> \
-        <span style="font-weight: bold; color: #4C7C83;">Cadastro de Usuários</span>
+        <a href="{{url('/painel')}}" class="sequenciaPaginas"></i> Home</a> \
+        <a href="{{url('/painel/usuarios')}}" class="sequenciaPaginas"> Usuários</a> \
+        <span class="sequenciaPaginasAtual">Cadastro de Usuários</span>
     </div>
 
     

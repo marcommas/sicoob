@@ -87,7 +87,9 @@ $(function () {
             finalizaPreloader();
             if (data == "1") {
                 location.href = "/painel";
-            } else {
+            } else if(data == "2"){
+                location.href = "/terminal";
+            }else {
                 jQuery(".alert-danger").show();
                 jQuery(".alert-danger").html(data);
             }

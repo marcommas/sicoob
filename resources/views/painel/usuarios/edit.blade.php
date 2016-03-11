@@ -6,9 +6,9 @@
      <h1 class="titulo-pg-painel">Gestão de Usuários</h1>
         <div class="divider"></div>
     <div>
-        <a href="{{url('/painel')}}"></i> Home</a> \
-        <a href="{{url('/painel/usuarios')}}"> Usuários</a> \
-        <span style="font-weight: bold; color: #4C7C83;">Alteração de Usuários</span>
+        <a href="{{url('/painel')}}" class="sequenciaPaginas"></i> Home</a> \
+        <a href="{{url('/painel/usuarios')}}" class="sequenciaPaginas"> Usuários</a> \
+        <span class="sequenciaPaginasAtual" >Alteração de Usuários</span>
     </div>
 
     <form class="form-padrao form-dados" method="POST" action="/painel/usuarios/editar/{{$user->id}}" send="/painel/usuarios/editar/{{$user->id}}" > 
@@ -44,7 +44,7 @@
                 <input type="text" name="name" value="{{ old('name', isset($user->name) ? $user->name : null)   }}" class="form-control" placeholder="Nome *">
             </div>
             <div class="form-group">
-                <input type="email" name="email" value="{{ old('email', isset($user->email) ? $user->email : null) }}" class="form-control" placeholder="Email *">
+                <input type="email" name="email" value="{{ old('email', isset($user->email) ? $user->email : null) }}" disabled =disabled" class="form-control" placeholder="Email *">
             </div>
             <div class="form-group">
                 <input type="password" name="old_password" class="form-control" placeholder="Senha Antiga *">
@@ -67,7 +67,7 @@
             <div class="form-group">
             <h4>Tipo *:</h4>
             
-                {!! Form::select('tipo', ['1' => 'Administrador', '2' => 'Comum'], Input::old('tipo', $user->tipo), ['class' => 'form-control']) !!}
+                {!! Form::select('tipo', ['1' => 'Administrador', '2' => 'Comum'], Input::old('tipo', $user->tipo), ['class' => 'form-control','disabled' => 'disabled']) !!}
             </div>
 
         </div>

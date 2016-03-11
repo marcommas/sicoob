@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Vagrant/php/www/html/Sicoob/app/Http/Controllers/Auth/AuthController.php</file>
-            <file>file:/C:/Vagrant/php/www/html/Sicoob/resources/lang/pt-BR/validation.php</file>
-            <file>file:/C:/Vagrant/php/www/html/Sicoob/resources/views/auth/login/index.blade.php</file>
-            <file>file:/C:/Vagrant/php/www/html/Sicoob/app/User.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
