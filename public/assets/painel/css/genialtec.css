@@ -77,7 +77,22 @@ p.relatorio{font-size: 18px;}
 .edit{background-color: #4C7C83;color: #FFF;padding: 6px 4px;border-radius: 5px;margin: 2px;}
 .delete{background-color: #FD3B3B;color: #FFF; padding: 6px 4px;border-radius: 5px;}
 
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #C8C8C8  ;
+  border-color: #A8A8A8 ;
+}
 
+.pagination > li > a,
+.pagination > li > span {
+
+  color: #606060 ;
+
+}
 /**********************************************************
 End Painel
 **********************************************************/
