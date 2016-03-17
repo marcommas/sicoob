@@ -23,7 +23,16 @@ class Cronica extends Model
         'caminho_arquivo' => 'mimes:pdf|max:5000',
     ];
     
+    
+    
     public function getCreatedAtAttribute($created_at){
         return \Carbon\Carbon::parse($created_at)->format('d/m/Y H:i:s');
+    }
+    
+    
+    static function cronicaAtual() {
+
+        return Cronica::where('ativo', '=', 1)->get();
+
     }
 }

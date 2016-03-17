@@ -13,6 +13,7 @@ Route::group(['prefix' => 'painel', 'middleware' => 'auth:1'], function(){
 
 Route::group(['prefix' => 'terminal', 'middleware' => 'auth.tipo:2'], function(){
     
+    Route::controller('home', 'Terminal\HomeController');
     Route::controller('/', 'Terminal\HomeController');
 });
 

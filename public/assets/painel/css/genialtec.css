@@ -15,7 +15,7 @@
 
 /*Resets*/
 .form-padrao{}
-.form-padrao input[type="text"],input[type="password"],input[type="email"], input[type="number"], select, option {border-radius: 0px;height: 40px;border: 1px solid #D5F4FF; color:#686868 ;font-size: 16px;}
+.form-padrao input[type="text"],input[type="password"],input[type="email"], input[type="number"], input[type="date"], select, option {border-radius: 0px;height: 40px;border: 1px solid #D0D0D0; color:#686868 ;font-size: 16px;}
 .form-padrao input[type="submit"]{}
 a:hover{text-decoration: none;color: #A0A0A0   !important;}
 
@@ -32,6 +32,8 @@ a:hover{text-decoration: none;color: #A0A0A0   !important;}
 .bg-padrao3{background-color: #F7921E; color: #FFF;}
 .bg-padrao4{background-color: #4C7C83; color: #FFF;}
 .bg-padrao5{background-color: #C53430; color: #FFF;}
+.bg-padrao6{background-color: #FFF;}
+.bg-padrao7{background-color: #E8E8E8 ;}
 
 
 
@@ -39,10 +41,11 @@ a:hover{text-decoration: none;color: #A0A0A0   !important;}
 Formulario Login
 */
 .login{margin: 150px auto;max-width: 550px;text-align: center;background-color: #FFF;}
-.conteudo-login{padding: 34px 8px 12px 8px;}
-.topo-login{background-color: #33B5E5;color: #FFF;padding: 5px;}
-.titulo-login{font-size: 24px;}
-.recuperar-senha{float: right;color: #33B5E5;}
+.conteudo-login{padding: 34px 8px 12px 8px; border: 1px solid #A9A9A9;  border-top: 0px}
+.topo-login{ border: 1px solid #A9A9A9;  border-bottom: 0px; background: #E0E0E0 !important;color: #484848 !important;padding: 8px 36px;font-size: 26px;width: 100%;font-weight: bold;}
+/*.topo-login{background-color: #E8E8E8  ;color: #000;padding: 5px; border: 1px solid #A9A9A9;}*/
+.titulo-login{font-size: 28px;}
+.recuperar-senha{float: right;color: #303030   ;}
 
 
 

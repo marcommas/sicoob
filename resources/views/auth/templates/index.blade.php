@@ -23,7 +23,7 @@
 
 
     </head>
-    <body class="bg-padrao">
+    <body class="bg-padrao6">
         <header>
             <h1 class="oculta">{{$titulo or 'Login | Sicoob'}}</h1>
         </header>
@@ -42,7 +42,7 @@
         <div class="modal fade" id="recuperarSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header bg-padrao2">
+                    <div class="modal-header bg-padrao7">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Recuperar Senha</h4>
                     </div>
