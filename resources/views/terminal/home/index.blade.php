@@ -8,8 +8,10 @@
         <title>Terminal | Sicoob</title>
 
         <link rel="icon" type="image/png" href="{{url('assets/img/favicon.ico')}}">
-
+        
         <link rel="stylesheet" href="{{url('assets/css/bootstrap.css')}}" >
+
+        <link rel="stylesheet" href="{{url('assets/css/bootstrap-theme.css')}}" >
 
         <link href="{{url('assets/terminal/css/terminal.css') }}" rel="stylesheet" type="text/css">
 
@@ -36,44 +38,41 @@
         </script>
     </head>
     <body style="background-image:url({{url('assets/img/background.jpg')}});  background-position: center;  background-size: 100% 100%;">
+     
 
-        <form method="POST" action="/terminal/home/imprimir-cronica" send="/terminal/home/imprimir-cronica" >
+        <form class="form-padrao"  method="POST" action="/terminal/home/imprimir-cronica" send="/terminal/home/imprimir-cronica" >
             {!! csrf_field() !!}
-            <div class="jumbotron vertical-center">
+            <div class="jumbotro vertical-center">
                 <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}"  />
 
                 <div class="container text-center">
 
-                    <!--<button type="submit" id="btn-imprimir" class="btn btn-default btn-lg active" >Imprimir</button>-->
-
-
-                    @if (session()->has('sucesso'))
-                    <br>
-                    <div class="alert alert-success alert-dismissable fade in" role="alert">
-
-                        <p>{{  session('sucesso') }}</p>
-
-                    </div>
-                    @endif
+                   
 
 
                     @foreach ($cronicas->all() as $cronica)
                     @if(  ($cronica->caminho_arquivo) != "" )
 
-                    <button type="submit" id="btn-imprimir"  onclick="imprimir('iframeCronica');" class="btn btn-default btn-lg active" >{{$cronica->id }} - {{$cronica->cronica }} </button>
-
+                    <!--<button type="submit" id="btn-imprimir"  onclick="imprimir('iframeCronica');" class="btn btn-default btn-lg active" >{{$cronica->id }} - {{$cronica->cronica }} </button>
+                    -->
+                    
+                    <button type="submit" class="botao" onclick="imprimir('iframeCronica');" >PRESSIONE AQUI E RETIRE SUA CRÔNICA</button>
+                    
                     <input type="hidden" name="id_cronica" value="{{$cronica->id}}" />
-                    <!--<a href="/assets/painel/upload/cronicas/{{$cronica->caminho_arquivo}}" target="_blank" class="sequenciaPaginasAtual"> 
+                    
+                    <input type="hidden" name="posicao" value="{{$cronica->posicao}}" />
 
-                    </a>-->
                     @endif
                     @endforeach
                     
+                   <!--
+                    <div id="aguardeImpressao" class="alert alert-success alert-dismissable" style="display:none;" >
+                        <h1>Aguarde a sua impressão...</h1>
+                    </div>
+                    -->
                     
                     <!-- 3 -->
-                    <!--<button  onclick="imprimir('iframeCronica');" >IMPRIMIR</button>-->
-                    
-                    <iframe id='iframeCronica' src='/assets/painel/upload/cronicas/1457720238-teste.pdf' style="display:none;"  ></iframe>
+                    <iframe id='iframeCronica' src='/assets/painel/upload/cronicas/{{$cronica->caminho_arquivo}}' style="display:none;"  ></iframe>
                     <!--3-->
 
 
@@ -82,13 +81,7 @@
             </div>
 
         </form>
-        <!-- 1 Load And Print -->
-        <!--<button id="idPrint" onclick="LoadAndPrint('/assets/painel/upload/cronicas/1457720238-teste.pdf')">Load and Print</button>
-        <br>
-        <div id="idContainer"></div>-->
-        <!-- 1 Load And Print -->
-        
-        
+
         <!-- 2 Suissa-->
         <!--<input type="submit"  value="Print Suissa"name="Submit" id="printbtn"onclick="PDFIframeLoad()" />
           <br>
@@ -97,35 +90,8 @@
         <!-- 2 Suissa-->
 
 
-   
-
-
-
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-        <script type="text/javascript">
-            /*1 1 Load And Print 
-             * Somente mostrando e não imprimindo*/
-            /*function PrintPdf() {
-                idPdf.Print();
-            }
-
-            function idPdf_onreadystatechange() {
-                if (idPdf.readyState === 4)
-                    setTimeout(PrintPdf, 1000);
-            }
-
-            function LoadAndPrint(url)
-            {
-                idContainer.innerHTML = 
-                    '<object id="idPdf" onreadystatechange="idPdf_onreadystatechange()"'+
-                        'width="300" height="400" type="application/pdf"' +
-                        'data="' + url + '?#view=Fit&scrollbar=0&toolbar=0&navpanes=0">' +
-                        '<span>PDF plugin is not available.</span>'+
-                    '</object>';
-            }*/
-            /*1*/
-        </script>
 
         <script type="text/javascript">
             /*3*/
@@ -134,7 +100,62 @@
                 x.contentWindow.print();
             }
             /*3*/
+            
+            
+            /*$(function () {
+                jQuery("form.form-padrao").submit(function () {
 
+                    jQuery(".msg-war").hide();
+                    jQuery(".aguardeImpressao").hide();
+
+                    var dadosForm = jQuery(this).serialize();
+
+                    jQuery.ajax({
+                        url: jQuery(this).attr("send"),
+                        data: dadosForm,
+                        type: "POST",
+                        beforeSend: iniciaPreloader()
+                    }).done(function (data) {
+                        finalizaPreloader();
+
+                        if (data == "1") {
+                            jQuery(".msg-suc").html("Aguarde a sua impressão...");
+                            jQuery(".msg-suc").show();
+
+                            //setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');location.reload();", 5000);
+                            setTimeout("jQuery('.msg-suc').hide();jQuery('#modalGestao').modal('hide');", 5000);
+                        } else {
+                            jQuery(".msg-war").html(data);
+                            jQuery(".msg-war").show();
+
+                            setTimeout("jQuery('.msg-war').hide();", 4500);
+                        }
+                    }).fail(function () {
+                        finalizaPreloader();
+                        alert("Falha Inesperada!");
+                    });
+
+                    return false;
+                });
+            });
+ 
+            function iniciaPreloader() {
+                jQuery(".preloader").show();
+            }
+
+            function finalizaPreloader() {
+                jQuery(".preloader").hide();
+            }*/
+            
+            
+            /*function aguardeImpressao(){
+
+                document.getElementById("aguardeImpressao").style.display="block";
+                
+                setTimeout(function(){
+                    document.getElementById("aguardeImpressao").style.display="none";
+                },4000);
+            }*/
         </script>
 
     </body>

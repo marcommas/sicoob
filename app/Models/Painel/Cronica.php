@@ -30,9 +30,29 @@ class Cronica extends Model
     }
     
     
-    static function cronicaAtual() {
-
-        return Cronica::where('ativo', '=', 1)->get();
+    static function cronicaAtual($id_cronica) {
+ 
+        return Cronica::where(function ($query) use ($id_cronica){
+            $query->where('id', '=', $id_cronica);
+        })->get();  
 
     }
+    
+    
+    static function idProximaCronica($posicaoCronica) {
+        
+        //Pega o maior id ativo que tem na sequencia de cronicas
+        $maxPosicaoCronica = Cronica::where('ativo', 1)->max('posicao');
+
+        return Cronica::where(function ($query) use ($posicaoCronica, $maxPosicaoCronica){
+            $query->where('ativo', '=', 1);
+
+            if ($maxPosicaoCronica <> $posicaoCronica) {
+                 $query->where('posicao', '>', $posicaoCronica);
+            }
+
+        })->orderBy('posicao','asc')->first(['id']);
+    }
+    
+    
 }

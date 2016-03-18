@@ -20,15 +20,11 @@ class HomeController extends Controller{
     public function getIndex(){
         
     
-        /*Relatorio::where(function ($query) use ($id_usuario, $id_cronica, $dataInicial, $dataFinal) {
-                            if ($id_usuario <> 0) {
-                                $query->where("id_usuario", '=', $id_usuario);
-                            }*/
-                            
-        //$cronicas = $this->cronica->get();
-        $cronicas = Cronica::cronicaAtual();
-         
-        return view('terminal.home.index', compact('cronicas'));
+        $idCronica = Cronica::idProximaCronica(0);
+        
+        $cronicas = Cronica::cronicaAtual($idCronica->id);
+
+        return view('terminal.home.index', compact('sucesso', 'cronicas'));
     }
     
     public function missingMethod($parameters = array()) {
@@ -37,36 +33,22 @@ class HomeController extends Controller{
     
     public function postImprimirCronica() {
         
-        $dadosForm = $this->request->all();
+        $dadosForm = $this->request->except('posicao');
         
-
-        //$dadosForm['id_cronica'] = 
-        //$dadosForm['id_cronica'] = 1;
-
         $this->relatorio->create($dadosForm);
-        /*$dadosForm = $this->request->all();
 
-        $validator = $this->validator->make($dadosForm, User::$rules);
-        if ($validator->fails()) {
+        //Pega a posição atual que foi impressa
+        $posicaoAtual = $this->request->input('posicao');
+        
+        //id do próximo que será impresso
+        $idProximaCronica = Cronica::idProximaCronica($posicaoAtual);
 
-            $messages = $validator->messages();
+        //Retorna os dados da próxima crônica
+        $cronicas = Cronica::cronicaAtual($idProximaCronica->id);
 
-            return redirect()->back()->withErrors($messages)->withInput();
-        }
 
-        $ativo = $this->request->input('ativo');
-
-        if ($ativo == 1) {
-            $dadosForm['ativo'] = 1;
-        } else {
-            $dadosForm['ativo'] = 0;
-        }
-        $this->user->create($dadosForm);
-*/
-        $cronicas = Cronica::cronicaAtual();
-         
+        //return 1;
         return view('terminal.home.index', compact('cronicas'));
 
-        //return redirect()->back()->with('sucesso', 'Aguarde até acabar a impressão!');
     }
 }
