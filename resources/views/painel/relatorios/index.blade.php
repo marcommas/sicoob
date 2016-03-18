@@ -5,11 +5,11 @@
 
 <div class="col-md-12">
 
-    <h1 class="titulo-pg-painel">Relatórios</h1>
+    <h1 class="titulo-pg-painel">Relatório</h1>
     <div class="divider"></div>
     <div>
         <a href="{{url('/painel')}}" class="sequenciaPaginas"></i> Home</a> \
-        <span class="sequenciaPaginasAtual">Relatórios</span>
+        <span class="sequenciaPaginasAtual">Relatório</span>
     </div>
 
 

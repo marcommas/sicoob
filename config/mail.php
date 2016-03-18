@@ -28,7 +28,8 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    //'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'mail.genialtec.com.br'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'noreply@sicoob.com.br', 'name' => 'Sicoob - Software'],
+    'from' => ['address' => 'marco.desenvolvimento@genialtec.com.br', 'name' => 'Genialtec'],
 
     /*
     |--------------------------------------------------------------------------

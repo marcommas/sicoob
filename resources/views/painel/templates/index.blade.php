@@ -60,11 +60,11 @@
                                 <a href="{{url('/painel/cronicas')}}" class="corNavegacao"><i class="fa fa-book"></i> Crônicas</a>
                             </li>
                             <li>
-                                <a href="{{url('/painel/relatorios')}}" class="corNavegacao"><i class="fa fa-bar-chart"></i> Relatórios</a>
+                                <a href="{{url('/painel/relatorios')}}" class="corNavegacao"><i class="fa fa-bar-chart"></i> Relatório</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="{{url('/painel/')}}" class="corNavegacao"><i class="fa fa-cog"></i> Configurações</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="{{url('/logout')}}" class="corNavegacao"><i class="fa fa-sign-out"></i> Sair</a>
                             </li>

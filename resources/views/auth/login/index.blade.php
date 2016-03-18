@@ -12,7 +12,7 @@
             <input type="password" name="password" class="form-control" placeholder="Senha">
         </div>
 
-        <a href="" class="recuperar-senha" data-toggle="modal" data-target="#recuperarSenha">Esqueceu a Senha?</a>
+        <!--<a href="" class="recuperar-senha" data-toggle="modal" data-target="#recuperarSenha">Esqueceu a Senha?</a>-->
 
         <input type="submit" name="btn-enviar" value="Entrar" class="btn-padrao btn-enviar">
     </form>

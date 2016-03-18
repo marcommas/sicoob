@@ -17,25 +17,6 @@
 
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-
-        
-        <script>
-        
- /*2 Suissa*/
-//for Chrome 
-/*function PDFIframeLoad() {
-    var iframe = document.getElementById('iframe_a');
-   if(iframe.src) {
-        var frm = iframe.contentWindow;
-
-            frm.focus();// focus on contentWindow is needed on some ie versions  
-            frm.print();
-            return false;
-    }
-}*/
-/*2 Suissa*/
-
-        </script>
     </head>
     <body style="background-image:url({{url('assets/img/background.jpg')}});  background-position: center;  background-size: 100% 100%;">
      
@@ -46,9 +27,6 @@
                 <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}"  />
 
                 <div class="container text-center">
-
-                   
-
 
                     @foreach ($cronicas->all() as $cronica)
                     @if(  ($cronica->caminho_arquivo) != "" )
@@ -70,11 +48,7 @@
                         <h1>Aguarde a sua impressão...</h1>
                     </div>
                     -->
-                    
-                    <!-- 3 -->
                     <iframe id='iframeCronica' src='/assets/painel/upload/cronicas/{{$cronica->caminho_arquivo}}' style="display:none;"  ></iframe>
-                    <!--3-->
-
 
                 </div>
 
@@ -82,25 +56,17 @@
 
         </form>
 
-        <!-- 2 Suissa-->
-        <!--<input type="submit"  value="Print Suissa"name="Submit" id="printbtn"onclick="PDFIframeLoad()" />
-          <br>
-        <iframe id="iframe_a" name='iframe_a' src='/assets/painel/upload/cronicas/1457720238-teste.pdf'    width="50%"    height="50%"   ></iframe>      
-        -->
-        <!-- 2 Suissa-->
-
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
         <script type="text/javascript">
-            /*3*/
+
             function imprimir(id) {
                 var x = document.getElementById(id);
                 x.contentWindow.print();
             }
-            /*3*/
-            
+           
             
             /*$(function () {
                 jQuery("form.form-padrao").submit(function () {
