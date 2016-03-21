@@ -67,6 +67,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default btn-lg active" onclick="limparCampos('/painel/cronicas/');" ><i class="fa fa-trash-o"></i>  Limpar</button>
+
             <button type="submit" class="btn btn-primary btn-lg active"><i class="fa fa-floppy-o"></i> Salvar</button>
 
 

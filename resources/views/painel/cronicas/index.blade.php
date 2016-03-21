@@ -49,9 +49,9 @@
                 <i class="fa fa-pencil-square-o"></i>
             </a>
 
-            <a class="delete" onclick="del('/painel/cronicas/deletar/{{$cronica->id}}')">
+            <!--<a class="delete" onclick="del('/painel/cronicas/deletar/{{$cronica->id}}')">
                 <i class="fa fa-times"></i>
-            </a>
+            </a>-->
         </td>
     </tr>
     @empty

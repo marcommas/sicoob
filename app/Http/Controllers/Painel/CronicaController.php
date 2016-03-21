@@ -85,9 +85,17 @@ class CronicaController extends Controller {
     }
 
     public function postEditar($id) {
+        
         $dadosForm = $this->request->all();
-
-        $validator = $this->validator->make($dadosForm, Cronica::$rulesUpdate);
+        //Validação feita no controller para pegar o id unico e aceitar ele na hora de alterar
+        $rulesUpdate = [
+            'cronica' => 'required|max:100',
+            'posicao' => 'required|integer|unique:cronicas,posicao,'.$id,
+            'caminho_arquivo' => 'mimes:pdf|max:5000',
+        ];
+        
+     
+        $validator = $this->validator->make($dadosForm, $rulesUpdate);
         if ($validator->fails()) {
             $messages = $validator->messages();
 
@@ -116,18 +124,21 @@ class CronicaController extends Controller {
             $dadosForm['ativo'] = 0;
         }
         
+        //$this->cronica->find($id)->update($this->request->except('posicao'));
+        $this->cronica->find($id)->update($dadosForm);
+        
         return redirect()->back()->with('sucesso', 'Alterado com Sucesso!');
 
     }
 
     public function getDeletar($id) {
         $this->cronica->find($id)->delete();
-        /*
-        DELETA O RELATÓRIO ANTES DA CRONICA, ASSIM N DÁ ERRO
-        $cronica = $this->cronica->find($id);
+        
+        //DELETA O RELATÓRIO ANTES DA CRONICA, ASSIM N DÁ ERRO
+       /* $cronica = $this->cronica->find($id);
         $cronica->getRelatorio()->detach();
-        $cronica->delete();
-        */
+        $cronica->delete();*/
+        
         return 1;
 
     }
