@@ -90,7 +90,7 @@ class CronicaController extends Controller {
         //Validação feita no controller para pegar o id unico e aceitar ele na hora de alterar
         $rulesUpdate = [
             'cronica' => 'required|max:100',
-            'posicao' => 'required|integer|unique:cronicas,posicao,'.$id,
+            'posicao' => 'required|integer|between:1,1000|unique:cronicas,posicao,'.$id,
             'caminho_arquivo' => 'mimes:pdf|max:5000',
         ];
         

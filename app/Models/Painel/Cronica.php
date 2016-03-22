@@ -11,7 +11,7 @@ class Cronica extends Model
 
     static $rules = [
         'cronica' => 'required|max:100',
-        'posicao' => 'required|integer|unique:cronicas',
+        'posicao' => 'required|integer|between:1,1000|unique:cronicas',
         //'caminho_arquivo' => 'image|mimes:jpeg,jpg,png,pdf',
         'caminho_arquivo' => 'required|mimes:pdf|max:5000',
     ];
