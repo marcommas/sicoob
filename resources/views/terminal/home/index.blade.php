@@ -34,7 +34,7 @@
                     <!--<button type="submit" id="btn-imprimir"  onclick="imprimir('iframeCronica');" class="btn btn-default btn-lg active" >{{$cronica->id }} - {{$cronica->cronica }} </button>
                     -->
                     
-                    <button type="submit" class="botao" onclick="imprimir('iframeCronica');" >PRESSIONE AQUI E RETIRE SUA CRÔNICA</button>
+                    <button type="submit" class="botao" onclick="imprimir('iframeCronica');" ><span class="botaoTextoSup">PRESSIONE AQUI</span><br><span class="botaoTextoInf">E RETIRE SEU TEXTO CULTURAL</span></button>
                     
                     <input type="hidden" name="id_cronica" value="{{$cronica->id}}" />
                     

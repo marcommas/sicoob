@@ -1,109 +1,113 @@
 html,
 body 
 {
-  height: 100%;
-  text-align:center;
-  /* Tags html e body não podem ter elementos paddind ou margin*/
+    height: 100%;
+    text-align:center;
+    /* Tags html e body não podem ter elementos paddind ou margin*/
 }
 
 
 .jumbotro.vertical-center {
-  margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
+    margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
 }
 
 .vertical-center {
-  min-height: 100%;  /* Fallback for vh unit */
-  min-height: 100vh; /* You might also want to use
-                        'height' property instead.
-                        
-                        Note that for percentage values of
-                        'height' or 'min-height' properties,
-                        the 'height' of the parent element
-                        should be specified explicitly.
-  
-                        In this case the parent of '.vertical-center'
-                        is the <body> element */
+    min-height: 100%;  /* Fallback for vh unit */
+    min-height: 100vh; /* You might also want to use
+                          'height' property instead.
+                          
+                          Note that for percentage values of
+                          'height' or 'min-height' properties,
+                          the 'height' of the parent element
+                          should be specified explicitly.
+    
+                          In this case the parent of '.vertical-center'
+                          is the <body> element */
 
-  /* Make it a flex container */
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; 
-  
-  /* Align the bootstrap's container vertically */
+    /* Make it a flex container */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+
+    /* Align the bootstrap's container vertically */
     -webkit-box-align : center;
-  -webkit-align-items : center;
-       -moz-box-align : center;
-       -ms-flex-align : center;
-          align-items : center;
-  
-  /* In legacy web browsers such as Firefox 9
-     we need to specify the width of the flex container */
-  width: 100%;
-  
-  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
-     hence the bootstrap's container won't be aligned to the center anymore.
-  
-     Therefore, we should use the following declarations to get it centered again */
-         -webkit-box-pack : center;
-            -moz-box-pack : center;
-            -ms-flex-pack : center;
-  -webkit-justify-content : center;
-          justify-content : center;
+    -webkit-align-items : center;
+    -moz-box-align : center;
+    -ms-flex-align : center;
+    align-items : center;
+
+    /* In legacy web browsers such as Firefox 9
+       we need to specify the width of the flex container */
+    width: 100%;
+
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+       hence the bootstrap's container won't be aligned to the center anymore.
+    
+       Therefore, we should use the following declarations to get it centered again */
+    -webkit-box-pack : center;
+    -moz-box-pack : center;
+    -ms-flex-pack : center;
+    -webkit-justify-content : center;
+    justify-content : center;
 }
 
 /*Estilo do botão*/
 .botao{
+    margin-top: 260px;
     display: inline-block;
     padding: 10px 16px;
     margin-bottom: 0;
     font-size: 28px;
     font-weight: normal;
+    font-family: Verdana, Geneva, sans-serif;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     -ms-touch-action: manipulation;
-     touch-action: manipulation;
+    touch-action: manipulation;
     cursor: pointer;
     -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     background-image: none;
-    border: 1px solid transparent;
-    
-  /*  background-color: #fff;*/
-  border-color: #ccc;
+    border: 0px solid transparent;
+    background-color: #00B09E;
+    border-radius: -25px;
 }
-/*
-.botao:focus,
-.botao:active:focus,
-.botao.active:focus,
-
-.botao:active.focus,
-.botao.active.focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-  
-}*/
 .botao:hover,
 .botao:focus,
 .botao.focus {
-  /*color: #aaa;*/
-  text-decoration: none;
+    /*color: #aaa;*/
+    text-decoration: none;
     color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+    background-color: #00B09E;
+    border-color: #adadad;
 }
 .botao:active,
 .botao.active {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.botaoTextoSup{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 40px;
+    color: #FFF;
+    letter-spacing:5px;
+}
+
+.botaoTextoInf{
+    text-decoration: none;
+    color: #003D42;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 
