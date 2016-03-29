@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <?php
-        //header("Content-Type: application/octet-stream"); 
-        //header('Content-Disposition: attachment; filename="1458737183-teste.pdf"');
-        //header('Content-Transfer-Encoding: binary');
-        // header('Content-Length: ' . filesize($file));
-        //header('Accept-Ranges: bytes');
-        ?>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
         <title>Terminal | Sicoob</title>
@@ -66,9 +60,6 @@
                         formulario.submit();
                 }, 5000);
             }
-
-
-                         
 
         </script>
 
